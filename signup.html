@@ -1,0 +1,199 @@
+<!DOCType HTML>
+<HTML>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<title>Elite-Fitness</title>
+<style type=text/css>
+	
+html,body{margin:0;}
+header{
+	position: fixed;
+	top:0;
+	height: 125px;
+	width: 100%;
+	background: white;
+}
+
+main{
+	margin-top: 128px;
+}
+
+
+
+
+// Not demo related
+body{
+		font-family: "Open Sans";
+		font-size: 1.25rem;
+}
+main,header{
+	padding: 10px 10%;
+	box-sizing: border-box;
+}
+
+	.head1 {
+		text-align:center;
+		font-size:40px;
+		color: #4169E1;
+		border: 1px solid powderblue;
+		background-color:#e8effc;
+		padding-top:15px;
+		padding-bottom:15px;
+		font-family:Verdana;
+		}
+.tf1{
+	font-size: 20px;
+	margin-top: 40px;
+	color:#4169E1;
+	margin-left: 90px;
+}
+.btn{
+	text-align: center;
+	
+}
+.name{
+font-size: 20px;
+color:#4169E1;	
+border-color:cornflowerblue;
+border-radius: 20px;
+outline: none;
+}
+#b1{
+	color:white;
+	border-radius: 3px;
+	background-color:RoyalBlue;
+	padding-left:25px;
+	padding-right:25px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:20px;
+	float:center;
+	margin-top:20px;
+	border-radius: 20px;
+    
+}
+</style>
+</head>
+<body>
+<div class="head1">	SIGN UP/REGISTER</div>
+
+
+<div class="tf1">
+<form>
+
+
+<label>Enter User Name:</label>&nbsp;&nbsp;&nbsp;<input type="text" class="name" id="name" required><br><br>
+<label>Enter Mobile NO:</label>&nbsp;&nbsp;&nbsp;<input type="text" class="name" id="mobile" required><br><br>
+<label>Enter Password:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="name" id="pass" required><br><br>
+<label>Confirm Password:</label>&nbsp;<input type="password" class="name" id="pass1" required><br><br>
+<label>Weight in Kg:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="name" id="weight" required><br><br>
+<label>Height in m:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="name" id="height" required><br><br>
+</form>
+</div>
+
+
+
+
+
+
+
+
+<div class="btn">
+<input type="button" onclick="submit()" value="Join Training" id="b1">
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script> 
+
+<script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyCVW9x8mOCRJJVz8bk62IY_4qsAGZArBjg",
+    authDomain: "elitefitness-13bff.firebaseapp.com",
+    databaseURL: "https://elitefitness-13bff-default-rtdb.firebaseio.com",
+    projectId: "elitefitness-13bff",
+    storageBucket: "elitefitness-13bff.appspot.com",
+    messagingSenderId: "289334485572",
+    appId: "1:289334485572:web:ea72e3ace868a528849211",
+    measurementId: "G-56X2451DRG"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script>
+	function submit(){
+
+		var a,b,c,c1,d,e,bmi,a1=1,a2=1,a3,a4;
+		a=document.getElementById("name").value;
+		b=document.getElementById("mobile").value;
+		c=document.getElementById("pass").value;
+        c1=document.getElementById("pass1").value;
+		d=document.getElementById("weight").value;
+		e=document.getElementById("height").value;
+
+if(a==""){
+alert("User name cannot be Empty");
+}
+else if((b<7000000000)||(b>9999999999)){
+alert("Enter Valid Mobile Number");
+}
+else if(c==""){
+alert("Password cannot be Empty");
+}
+else if(c1==""){
+alert("Confirm Password cannot be Empty");
+}
+else if(c!=c1){
+alert("Password and Confirm Password must be Same");	
+}
+else if((d<=0)||(d=="")){
+alert("Enter Valid Weight in KG");
+}
+else if((e<=0)||(e=="")){
+alert("Enter Valid Height in meter");
+}
+else{
+a1=e*e;
+a2=d/a1;
+bmi=a2;
+
+
+
+		firebase.database().ref('Pictures/'+`${document.getElementById("mobile").value}`).set({
+        Name: a,
+        Mobile:b,
+        Password:c,
+        Bmi:bmi
+		});
+	alert("Your Details are Registered Successfully");	
+	
+
+
+if(bmi>=30.0){
+	window.open("obesity.html");
+}
+if((bmi>=25.0)&&(bmi<=29.9)){
+    window.open("over.html");
+}	
+if((bmi>=18.5)&&(bmi<=24.9)){
+	alert("Your BMI is Normal All the Best and Continue the Same");
+	window.open("normal.html");
+}
+else{
+	window.open("under.html");
+}
+
+}
+
+
+
+}
+</script>
+</body>
+</HTML>
