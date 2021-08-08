@@ -162,6 +162,7 @@ else{
 a1=e*e;
 a2=d/a1;
 bmi=a2;
+bmi=parseInt(a2);
 
 
 
@@ -176,16 +177,19 @@ bmi=a2;
 
 
 if(bmi>=30.0){
+	alert('Your BMI is '+bmi+' Obesity All the best and continue the training');
 	window.open("obesity.html");
 }
 if((bmi>=25.0)&&(bmi<=29.9)){
+	alert('Your BMI is '+bmi+' OverWeight All the best and continue the training');
     window.open("over.html");
 }	
 if((bmi>=18.5)&&(bmi<=24.9)){
-	alert("Your BMI is Normal All the Best and Continue the Same");
+	alert('Your BMI is '+bmi+' Normal All the best and continue the training');
 	window.open("normal.html");
 }
 else{
+	alert('Your BMI is '+bmi+' Uner Weight All the best and continue the training');
 	window.open("under.html");
 }
 
